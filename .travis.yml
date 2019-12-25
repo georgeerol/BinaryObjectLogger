@@ -4,5 +4,5 @@ jdk: openjdk8
 
 
 script:
-  # the following command line builds the project, runs maven clean and then install
+  # the following command line builds the project, runs maven clean then install
   - mvn clean install
