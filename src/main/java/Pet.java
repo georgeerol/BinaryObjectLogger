@@ -5,7 +5,7 @@ import java.io.IOException;
  */
 public class Pet implements BinaryLoggable {
 
-    private String name =null;
+    public String name =null;
     private boolean vegetarian;
     private String eats;
     private int noOfLegs;

@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
 /**
@@ -12,10 +14,8 @@ import java.util.Iterator;
 public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
 
     private FileOutputStream fileOutputStream;
-    protected long position = 0L;
-
-    FileValidation fileValidation;
-    File file;
+    private FileValidation fileValidation;
+    private File file;
 
     public BinaryLogFile(File file) {
         super(file);
@@ -31,13 +31,13 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
             if (loggable != null) {
                 this.fileOutputStream = new FileOutputStream(outputFile, true);
                 String className = loggable.getClass().getCanonicalName();
-                int twoIntegers= Integer.BYTES *2;
-                byte[] twoIntegersBytes = new byte[twoIntegers];
-                byte[] classNameBytes = className.getBytes();
-                byte[] dataBytes = loggable.toBytes();
-                this.fileOutputStream.write(twoIntegersBytes);
-                this.fileOutputStream.write(classNameBytes);
-                this.fileOutputStream.write(dataBytes);
+                byte[] nameBytes = className.getBytes(StandardCharsets.UTF_8);
+                byte[] data = loggable.toBytes();
+                this.fileOutputStream.write(nameBytes);
+                this.fileOutputStream.write(":".getBytes());
+                this.fileOutputStream.write(data);
+                this.fileOutputStream.write("\n".getBytes());
+                this.fileOutputStream.flush();
             }
         }
 
@@ -46,22 +46,35 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
 
     @Override
     Iterator<T> read(Class<T> clazz) throws IOException {
-        return null;
+        Iterator<T> classInfo = null;
+        BinaryFileReader binaryFileReader = new BinaryFileReader(clazz.getCanonicalName(), file);
+        try {
+            classInfo = binaryFileReader.read();
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            e.printStackTrace();
+        }
+        return classInfo;
     }
 
     @Override
     public void close() throws Exception {
+        this.fileOutputStream.close();
 
 
     }
 
     public static void main(String[] args) throws IOException {
-//        File file = new File(BinaryLogFile.class.getClassLoader().getResource("test").getFile());
         File file = new File("george");
         System.out.println(file.exists());
         BinaryLoggable loggable = new Pet("George");
         BinaryLogFile binaryLogFile = new BinaryLogFile(file);
+
         binaryLogFile.write(loggable);
+        Iterator<Pet> george = binaryLogFile.read(Pet.class);
+        while(george.hasNext()){
+            Pet message = george.next();
+            System.out.println(message.name);
+        }
 
     }
 }
