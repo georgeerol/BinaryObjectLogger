@@ -10,9 +10,11 @@ import java.util.Iterator;
  */
 public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
 
+    File file;
 
     public BinaryLogFile(File file) {
         super(file);
+
     }
 
     @Override
