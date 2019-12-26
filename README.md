@@ -2,7 +2,9 @@
 [![Build Status](https://travis-ci.com/georgeerol/BinaryObjectLogger.svg?branch=master)](https://travis-ci.com/georgeerol/BinaryObjectLogger)
 
 ## Problem
-Using given interface and abstract class definitions, implement a Binary Object Logger. The basic idea is to have a binary object logger class instantiated with a file path where the log will be written. The write method accepts objects implementing a "binary loggable" interface that defines methods for writing and reading those objects to/from an array of bytes. Binary object logger will write such objects into a given binary file, and it will support reading objects back from the binary file in an iterative fashion. You should come up with a binary file schema that supports this interface.
+Using given interface and abstract class definitions, implement a Binary Object Logger. 
+The basic idea is to have a binary object logger class instantiated with a file path where the log will be written. The write method accepts objects implementing a "binary loggable" interface that defines methods for writing and reading those objects to/from an array of bytes. Binary object logger will write such objects into a given binary file, and it will support reading objects back from the binary file in an iterative fashion.
+You should come up with a binary file schema that supports this interface.
 Your implementation should be simple, robust, and with minimal overhead, so that it could be used in a performance-critical environment. This means minimal CPU and memory resources used when logger writes into the log or reads from the log. You do not have to worry about multiple threads trying to write into the same binary logger.
 
 
