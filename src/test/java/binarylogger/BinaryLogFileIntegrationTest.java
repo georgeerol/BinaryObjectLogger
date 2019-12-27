@@ -2,10 +2,10 @@ package binarylogger;
 
 import loggable.BinaryLoggable;
 import loggable.Loggable;
+import loggable.NoEmptyConstructorLoggable;
 import loggable.NotLoggable;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -60,9 +60,34 @@ public class BinaryLogFileIntegrationTest {
         } catch (IOException e) {
             assertEquals(expectedMessage, e.getMessage());
         }
-
     }
 
+
+    @Test
+    public void testReadOnANoNameFile() {
+        String expectedMessage = "Unable to create file. No such file or directory";
+        BinaryLogFile binaryLogFile = new BinaryLogFile(new File(""));
+        try {
+            binaryLogFile.read(Loggable.class);
+        } catch (IOException e) {
+            assertEquals(expectedMessage, e.getMessage());
+        }
+    }
+
+
+    @Test
+    public void testReadWithNoEmptyConstructorLoggable() {
+        String expectedMessage = "loggable.NoEmptyConstructorLoggable does not have an empty constructor. " +
+                "loggable.NoEmptyConstructorLoggable.<init>()";
+        BinaryLogFile binaryLogFile = new BinaryLogFile(file);
+        try {
+            binaryLogFile.read(NoEmptyConstructorLoggable.class);
+        } catch (IOException e) {
+            assertEquals(expectedMessage, e.getMessage());
+        }
+
+
+    }
 
     @After
     public void cleanup() throws IOException {
