@@ -29,7 +29,7 @@ public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable
     public Iterator<T> read() throws IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         if (fileValidation.isValid() && classValidation.isValid() && classValidation.isInstanceOfBinaryLoggable()) {
             fileInputStream = new FileInputStream(file);
-            T candidate;
+            T binaryLoggableClass;
             BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
             byte[] data;
             String line;
@@ -41,13 +41,12 @@ public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable
                     data = str[1].getBytes();
                     Class<?> aClass = Class.forName(tClassName);
                     Object constructClass = aClass.getConstructor().newInstance();
-                    candidate = (T) constructClass;
-                    candidate.fromBytes(data);
-                    list.add(candidate);
+                    binaryLoggableClass = (T) constructClass;
+                    binaryLoggableClass.fromBytes(data);
+                    list.add(binaryLoggableClass);
                 }
             }
-            Iterator<T> iterator = list.iterator();
-            return iterator;
+            return list.iterator();
         }
         return null;
     }

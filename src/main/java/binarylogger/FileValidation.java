@@ -21,14 +21,14 @@ public class FileValidation {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            throw new IOException("Unable to create file." + e.getMessage(), e);
+            throw new IOException("Unable to create file. " + e.getMessage(), e);
         }
 
         if(!file.canWrite())
-                throw new IOException(("Unable to write to the giving file" + file.getPath()));
+                throw new IOException(("Unable to write to the giving file " + file.getPath()));
 
         if(!file.canRead())
-            throw new IOException(("Unable to read to the giving file" + file.getPath()));
+            throw new IOException(("Unable to read to the giving file " + file.getPath()));
 
         return true;
     }
