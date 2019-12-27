@@ -17,7 +17,7 @@ public class FileValidation {
 
     public boolean isValid() throws IOException {
         try {
-            if (!file.exists()) file.createNewFile();
+            if (!file.exists()) return file.createNewFile();
         } catch (IOException e) {
             throw new IOException("Unable to create file. " + e.getMessage(), e);
         }
