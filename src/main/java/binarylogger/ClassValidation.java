@@ -19,14 +19,13 @@ public class ClassValidation {
     /**
      * @return
      */
-    public boolean isValid() {
+    public boolean isValid() throws ClassNotFoundException {
         try {
             Class.forName(tClassName);
             return true;
         } catch (ClassNotFoundException e) {
-            return false;
+            throw new ClassNotFoundException(e.getMessage());
         }
-
     }
 
     public boolean isInstanceOfBinaryLoggable() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
