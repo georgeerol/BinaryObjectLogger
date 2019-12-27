@@ -9,7 +9,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class ClassValidation {
 
-    String tClassName;
+    private String tClassName;
 
     public ClassValidation(String tClassName) {
         this.tClassName = tClassName;
