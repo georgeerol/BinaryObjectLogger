@@ -30,23 +30,28 @@ public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable
         if (fileValidation.isValid() && classValidation.isValid() && classValidation.isInstanceOfBinaryLoggable()) {
             fileInputStream = new FileInputStream(file);
             T binaryLoggableClass;
-            BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
-            byte[] data;
-            String line;
-            List<T> list = new ArrayList<>();
-            while ((line = br.readLine()) != null) {
-                String[] str = line.split("->");
-                String className = str[0];
-                if (this.tClassName.equals(className)) {
-                    data = str[1].getBytes();
-                    Class<?> aClass = Class.forName(tClassName);
-                    Object constructClass = aClass.getConstructor().newInstance();
-                    binaryLoggableClass = (T) constructClass;
-                    binaryLoggableClass.fromBytes(data);
-                    list.add(binaryLoggableClass);
+            BufferedReader br = null;
+            try{
+               br = new BufferedReader(new InputStreamReader(fileInputStream));
+                byte[] data;
+                String line;
+                List<T> list = new ArrayList<>();
+                while ((line = br.readLine()) != null) {
+                    String[] str = line.split("->");
+                    String className = str[0];
+                    if (this.tClassName.equals(className)) {
+                        data = str[1].getBytes();
+                        Class<?> aClass = Class.forName(tClassName);
+                        Object constructClass = aClass.getConstructor().newInstance();
+                        binaryLoggableClass = (T) constructClass;
+                        binaryLoggableClass.fromBytes(data);
+                        list.add(binaryLoggableClass);
+                    }
                 }
+                return list.iterator();
+            }finally {
+                br.close();
             }
-            return list.iterator();
         }
         return null;
     }
