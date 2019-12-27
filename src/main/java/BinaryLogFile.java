@@ -34,7 +34,7 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
                 byte[] nameBytes = className.getBytes(StandardCharsets.UTF_8);
                 byte[] data = loggable.toBytes();
                 this.fileOutputStream.write(nameBytes);
-                this.fileOutputStream.write(":".getBytes());
+                this.fileOutputStream.write("->".getBytes());
                 this.fileOutputStream.write(data);
                 this.fileOutputStream.write("\n".getBytes());
                 this.fileOutputStream.flush();
@@ -42,7 +42,6 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
         }
 
     }
-
 
     @Override
     Iterator<T> read(Class<T> clazz) throws IOException {
@@ -60,21 +59,6 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
     public void close() throws Exception {
         this.fileOutputStream.close();
 
-
-    }
-
-    public static void main(String[] args) throws IOException {
-        File file = new File("george");
-        System.out.println(file.exists());
-        BinaryLoggable loggable = new Pet("George");
-        BinaryLogFile binaryLogFile = new BinaryLogFile(file);
-
-        binaryLogFile.write(loggable);
-        Iterator<Pet> george = binaryLogFile.read(Pet.class);
-        while(george.hasNext()){
-            Pet message = george.next();
-            System.out.println(message.name);
-        }
 
     }
 }
