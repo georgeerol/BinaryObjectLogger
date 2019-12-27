@@ -31,18 +31,17 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
 
     @Override
     public void write(T loggable) throws IOException {
-        if (fileValidation.isValid()) {
-            if (loggable != null) {
-                this.fileOutputStream = new FileOutputStream(outputFile, true);
-                String className = loggable.getClass().getCanonicalName();
-                byte[] nameBytes = className.getBytes(StandardCharsets.UTF_8);
-                byte[] data = loggable.toBytes();
-                this.fileOutputStream.write(nameBytes);
-                this.fileOutputStream.write("->".getBytes());
-                this.fileOutputStream.write(data);
-                this.fileOutputStream.write("\n".getBytes());
-                this.fileOutputStream.flush();
-            }
+        if (fileValidation.isValid() && loggable != null) {
+            this.fileOutputStream = new FileOutputStream(outputFile, true);
+            String className = loggable.getClass().getCanonicalName();
+            byte[] nameBytes = className.getBytes(StandardCharsets.UTF_8);
+            byte[] data = loggable.toBytes();
+            this.fileOutputStream.write(nameBytes);
+            this.fileOutputStream.write("->".getBytes());
+            this.fileOutputStream.write(data);
+            this.fileOutputStream.write("\n".getBytes());
+            this.fileOutputStream.flush();
+
         }
 
     }
