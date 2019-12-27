@@ -30,9 +30,7 @@ public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable
         if (fileValidation.isValid() && classValidation.isValid() && classValidation.isInstanceOfBinaryLoggable()) {
             fileInputStream = new FileInputStream(file);
             T binaryLoggableClass;
-            BufferedReader br = null;
-            try {
-                br = new BufferedReader(new InputStreamReader(fileInputStream));
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream))) {
                 byte[] data;
                 String line;
                 List<T> list = new ArrayList<>();
@@ -49,10 +47,6 @@ public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable
                     }
                 }
                 return list.iterator();
-            } finally {
-                if (br != null) {
-                    br.close();
-                }
             }
         }
         return null;
@@ -60,10 +54,9 @@ public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable
 
     @Override
     public void close() throws IOException {
-        if(fileInputStream != null){
+        if (fileInputStream != null) {
             fileInputStream.close();
         }
-
 
 
     }

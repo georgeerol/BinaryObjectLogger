@@ -1,7 +1,5 @@
 package loggable;
 
-import java.io.IOException;
-
 /**
  * Created by George Fouche on 12/26/19.
  */
