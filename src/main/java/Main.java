@@ -10,14 +10,15 @@ import java.util.Iterator;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ClassLoader classLoader = Main.class.getClassLoader();
         File file = new File(classLoader.getResource("test").getFile());
         BinaryLoggable loggable = new Loggable("I'm a log message");
+        BinaryLogFile binaryLogFile = null;
         try {
-            BinaryLogFile binaryLogFile = new BinaryLogFile(file);
+            binaryLogFile = new BinaryLogFile(file);
             binaryLogFile.write(loggable);
-            binaryLogFile.close();
+
             Iterator<Loggable> george = binaryLogFile.read(Loggable.class);
             while (george.hasNext()) {
                 Loggable message = george.next();
@@ -25,6 +26,10 @@ public class Main {
             }
         } catch (Exception ignored) {
 
+        }finally {
+            if(binaryLogFile != null){
+                binaryLogFile.close();
+            }
         }
 
     }
