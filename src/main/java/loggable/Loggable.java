@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Loggable implements BinaryLoggable {
 
-    private String logMessage = null;
+    private String logMessage;
 
     public Loggable() {
 
@@ -22,6 +22,10 @@ public class Loggable implements BinaryLoggable {
         sb.append(dateFormat.format(date)).append("-");
         sb.append("[").append(message).append("]");
         logMessage = sb.toString();
+    }
+
+    public void setLogMessage(String logMessage) {
+        this.logMessage = logMessage;
     }
 
     public String getLogMessage() {

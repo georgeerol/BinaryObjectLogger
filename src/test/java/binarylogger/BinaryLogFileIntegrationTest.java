@@ -1,9 +1,6 @@
 package binarylogger;
 
-import loggable.BinaryLoggable;
-import loggable.Loggable;
-import loggable.NoEmptyConstructorLoggable;
-import loggable.NotLoggable;
+import loggable.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +33,33 @@ public class BinaryLogFileIntegrationTest {
         binaryLogFile.close();
         Loggable message = (Loggable) binaryLoggableIterator.next();
         assertEquals(message.getLogMessage(), ((Loggable) loggable).getLogMessage());
+    }
+
+    @Test
+    public void testDifferentBinaryLoggableClassesWritingAndReadingFromFile() throws Exception {
+        BinaryLoggable loggable = new Loggable("I'm a log message");
+        BinaryLoggable  systemLog = new SystemLog("Computer","I'm the fastest computer");
+        BinaryLogFile binaryLogFile = new BinaryLogFile(file);
+        binaryLogFile.write(loggable);
+        binaryLogFile.write(systemLog);
+
+
+        /* Loggable Class */
+        Iterator<BinaryLoggable> binaryLoggableIterator = binaryLogFile.read(Loggable.class);
+        Loggable message = (Loggable) binaryLoggableIterator.next();
+        assertEquals(message.getLogMessage(), ((Loggable) loggable).getLogMessage());
+
+       /* SystemLog Class */
+        Iterator<BinaryLoggable> systemLogIterator = binaryLogFile.read(SystemLog.class);
+        binaryLogFile.close();
+        SystemLog systemMessage = (SystemLog) systemLogIterator.next();
+
+        assertEquals(systemMessage.getSystem(), ((SystemLog) systemLog).getSystem());
+        assertEquals(systemMessage.getLogMessage(),((SystemLog) systemLog).getLogMessage());
+        binaryLogFile.close();
+
+
+
     }
 
     @Test
