@@ -51,8 +51,9 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
     @Override
     public Iterator<T> read(Class<T> clazz) throws IOException {
         Iterator<T> classInfo;
-        BinaryFileReader binaryFileReader = new BinaryFileReader(clazz.getCanonicalName(), file);
+
         try {
+            BinaryFileReader binaryFileReader = new BinaryFileReader(clazz.getCanonicalName(), file);
             classInfo = binaryFileReader.read();
         } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             throw new IOException(e.getMessage());

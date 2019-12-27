@@ -10,17 +10,21 @@ import java.util.Iterator;
  */
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ClassLoader classLoader = Main.class.getClassLoader();
         File file = new File(classLoader.getResource("test").getFile());
         BinaryLoggable loggable = new Loggable("I'm a log message");
-        BinaryLogFile binaryLogFile = new BinaryLogFile(file);
-        binaryLogFile.write(loggable);
-        binaryLogFile.close();
-        Iterator<Loggable> george = binaryLogFile.read(Loggable.class);
-        while(george.hasNext()){
-            Loggable message = george.next();
-            System.out.println(message.getLogMessage());
+        try {
+            BinaryLogFile binaryLogFile = new BinaryLogFile(file);
+            binaryLogFile.write(loggable);
+            binaryLogFile.close();
+            Iterator<Loggable> george = binaryLogFile.read(Loggable.class);
+            while (george.hasNext()) {
+                Loggable message = george.next();
+                System.out.println(message.getLogMessage());
+            }
+        } catch (Exception ignored) {
+
         }
 
     }
