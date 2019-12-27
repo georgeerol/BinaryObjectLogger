@@ -1,7 +1,9 @@
+package binarylogger;
+
+import loggable.BinaryLoggable;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

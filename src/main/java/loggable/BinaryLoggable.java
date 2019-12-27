@@ -1,7 +1,9 @@
+package loggable;
+
 import java.io.IOException;
 
 /**
- * BinaryLoggable represents an entity that can be logged by {@code BinaryLogger}.
+ * loggable.BinaryLoggable represents an entity that can be logged by {@code BinaryLogger}.
  * Created by George Fouche on 12/23/19.
  */
 public interface BinaryLoggable {
