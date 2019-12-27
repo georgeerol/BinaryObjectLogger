@@ -1,3 +1,7 @@
+import binarylogger.BinaryLogFile;
+import loggable.BinaryLoggable;
+import loggable.Logger;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;

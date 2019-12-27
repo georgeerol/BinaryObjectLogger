@@ -1,4 +1,6 @@
+package binarylogger;
 
+import loggable.BinaryLoggable;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +23,7 @@ public abstract class BinaryLogger<T extends BinaryLoggable> implements AutoClos
     /**
      * Writes the serialized instance.
      *
-     * @param loggable an instance of {@code BinaryLoggable} that needs to
+     * @param loggable an instance of {@code loggable.BinaryLoggable} that needs to
     be logged
      * @throws IOException if any IO operation fails
      */

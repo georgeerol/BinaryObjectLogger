@@ -1,3 +1,8 @@
+package binarylogger;
+
+import binarylogger.BinaryFileReader;
+import loggable.BinaryLoggable;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,7 +31,7 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
 
 
     @Override
-    void write(T loggable) throws IOException {
+    public void write(T loggable) throws IOException {
         if (fileValidation.isValid()) {
             if (loggable != null) {
                 this.fileOutputStream = new FileOutputStream(outputFile, true);
@@ -44,7 +49,7 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
     }
 
     @Override
-    Iterator<T> read(Class<T> clazz) throws IOException {
+    public Iterator<T> read(Class<T> clazz) throws IOException {
         Iterator<T> classInfo = null;
         BinaryFileReader binaryFileReader = new BinaryFileReader(clazz.getCanonicalName(), file);
         try {

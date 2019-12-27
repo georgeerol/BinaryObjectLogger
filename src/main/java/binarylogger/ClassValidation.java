@@ -1,5 +1,8 @@
+package binarylogger;
+
+import loggable.BinaryLoggable;
+
 import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.StandardCharsets;
 
 /**
  * Created by George Fouche on 12/25/19.
@@ -30,7 +33,7 @@ public class ClassValidation {
         Class<?> className = Class.forName(tClassName);
         Object constructClass = className.getConstructor().newInstance();
         if (!(constructClass instanceof BinaryLoggable)) {
-            throw new IllegalStateException(tClassName + " does not implement BinaryLoggable");
+            throw new IllegalStateException(tClassName + " does not implement loggable.BinaryLoggable");
         }
 
         return true;
