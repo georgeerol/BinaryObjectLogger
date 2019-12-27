@@ -50,21 +50,27 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
     @Override
     public Iterator<T> read(Class<T> clazz) throws IOException {
         Iterator<T> classInfo;
-
+        BinaryFileReader binaryFileReader = null;
         try {
-            BinaryFileReader binaryFileReader = new BinaryFileReader(clazz.getCanonicalName(), file);
+            binaryFileReader = new BinaryFileReader(clazz.getCanonicalName(), file);
             classInfo = binaryFileReader.read();
         } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             throw new IOException(e.getMessage());
         } catch (NoSuchMethodException e) {
             throw new IOException(clazz.getCanonicalName() + " does not have an empty constructor. " + e.getMessage());
+        } finally {
+            if (binaryFileReader != null) {
+                binaryFileReader.close();
+            }
         }
         return classInfo;
     }
 
     @Override
     public void close() throws Exception {
-        this.fileOutputStream.close();
+        if (fileOutputStream != null) {
+            this.fileOutputStream.close();
+        }
 
 
     }
