@@ -38,7 +38,7 @@ public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable
                     String[] str = line.split("->");
                     String className = str[0];
                     if (this.tClassName.equals(className)) {
-                        data = str[1].getBytes();
+                        data = (str.length > 1) ? str[1].getBytes() : "".getBytes();
                         Class<?> aClass = Class.forName(tClassName);
                         Object constructClass = aClass.getConstructor().newInstance();
                         binaryLoggableClass = (T) constructClass;

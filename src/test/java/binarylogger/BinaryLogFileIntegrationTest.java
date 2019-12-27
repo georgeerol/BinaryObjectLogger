@@ -38,7 +38,7 @@ public class BinaryLogFileIntegrationTest {
     @Test
     public void testDifferentBinaryLoggableClassesWritingAndReadingFromFile() throws Exception {
         BinaryLoggable loggable = new Loggable("I'm a log message");
-        BinaryLoggable  systemLog = new SystemLog("Computer","I'm the fastest computer");
+        BinaryLoggable systemLog = new SystemLog("Computer", "I'm the fastest computer");
         BinaryLogFile binaryLogFile = new BinaryLogFile(file);
         binaryLogFile.write(loggable);
         binaryLogFile.write(systemLog);
@@ -49,18 +49,30 @@ public class BinaryLogFileIntegrationTest {
         Loggable message = (Loggable) binaryLoggableIterator.next();
         assertEquals(message.getLogMessage(), ((Loggable) loggable).getLogMessage());
 
-       /* SystemLog Class */
+        /* SystemLog Class */
         Iterator<BinaryLoggable> systemLogIterator = binaryLogFile.read(SystemLog.class);
         binaryLogFile.close();
         SystemLog systemMessage = (SystemLog) systemLogIterator.next();
 
         assertEquals(systemMessage.getSystem(), ((SystemLog) systemLog).getSystem());
-        assertEquals(systemMessage.getLogMessage(),((SystemLog) systemLog).getLogMessage());
+        assertEquals(systemMessage.getLogMessage(), ((SystemLog) systemLog).getLogMessage());
         binaryLogFile.close();
 
+    }
 
+    @Test(expected = ClassCastException.class)
+    public void testBinaryLoggableWithANoImplClass() throws Exception {
+        BinaryLoggable loggable = new LoggableWithNoImpl();
+        BinaryLogFile binaryLogFile = new BinaryLogFile(file);
+        binaryLogFile.write(loggable);
+
+        Iterator<BinaryLoggable> binaryLoggableIterator = binaryLogFile.read(LoggableWithNoImpl.class);
+        binaryLogFile.close();
+        Loggable message = (Loggable) binaryLoggableIterator.next();
+        assertNull(message);
 
     }
+
 
     @Test
     public void testReadAClassThatDoesNotImplementBinaryLoggable() throws Exception {
