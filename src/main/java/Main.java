@@ -1,9 +1,8 @@
 import binarylogger.BinaryLogFile;
 import loggable.BinaryLoggable;
-import loggable.Logger;
+import loggable.Loggable;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Iterator;
 
 /**
@@ -11,14 +10,16 @@ import java.util.Iterator;
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        File file = new File("george");
-        BinaryLoggable loggable = new Logger("I'm a log message");
+    public static void main(String[] args) throws Exception {
+        ClassLoader classLoader = Main.class.getClassLoader();
+        File file = new File(classLoader.getResource("test").getFile());
+        BinaryLoggable loggable = new Loggable("I'm a log message");
         BinaryLogFile binaryLogFile = new BinaryLogFile(file);
         binaryLogFile.write(loggable);
-        Iterator<Logger> george = binaryLogFile.read(Logger.class);
+        binaryLogFile.close();
+        Iterator<Loggable> george = binaryLogFile.read(Loggable.class);
         while(george.hasNext()){
-            Logger message = george.next();
+            Loggable message = george.next();
             System.out.println(message.getLogMessage());
         }
 

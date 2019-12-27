@@ -1,6 +1,5 @@
 package loggable;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,15 +7,15 @@ import java.util.Date;
 /**
  * Created by George Fouche on 12/26/19.
  */
-public class Logger implements BinaryLoggable {
+public class Loggable implements BinaryLoggable {
 
-    String logMessage = null;
+    private String logMessage = null;
 
-    public Logger() {
+    public Loggable() {
 
     }
 
-    public  Logger(String message) {
+    public Loggable(String message) {
         StringBuilder sb = new StringBuilder();
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
