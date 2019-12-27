@@ -28,7 +28,6 @@ public class Main {
             Iterator<Loggable> loggableIterator = binaryLogFile.read(Loggable.class);
             while (loggableIterator.hasNext()) {
                 Loggable message = loggableIterator.next();
-                System.out.println("*Printing Loggable Class*");
                 System.out.println(message.getLogMessage());
             }
 
@@ -36,7 +35,6 @@ public class Main {
             Iterator<SystemLog> systemLogIterator = binaryLogFile.read(SystemLog.class);
             while (systemLogIterator.hasNext()) {
                 SystemLog message = systemLogIterator.next();
-                System.out.println("*Printing SystemLog Class*");
                 System.out.println("System type:" + message.getSystem());
                 System.out.println(message.getLogMessage());
             }
