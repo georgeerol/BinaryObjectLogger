@@ -16,10 +16,8 @@ public class FileValidation {
     }
 
     public boolean isValid() throws IOException {
-        if (file == null) throw new IllegalArgumentException("The output file is not provided");
-
         try {
-            file.createNewFile();
+            if (!file.exists()) file.createNewFile();
         } catch (IOException e) {
             throw new IOException("Unable to create file. " + e.getMessage(), e);
         }

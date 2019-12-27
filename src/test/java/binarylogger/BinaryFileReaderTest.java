@@ -1,7 +1,5 @@
 package binarylogger;
 
-import binarylogger.BinaryFileReader;
-import binarylogger.BinaryLogFile;
 import loggable.Loggable;
 import org.junit.After;
 import org.junit.Before;
