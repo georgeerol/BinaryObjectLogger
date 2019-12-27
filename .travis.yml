@@ -3,6 +3,12 @@ jdk: openjdk8
 
 
 
+addons:
+  sonarcloud:
+    organization: "georgeerol"
+    token:
+      secure: "539bcf8de638366707009503b156e3d171873522" # encrypted value of your token
+
 script:
-  # the following command line builds the project, runs maven clean then install
-  - mvn clean install
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=georgeerol_BinaryObjectLogger
