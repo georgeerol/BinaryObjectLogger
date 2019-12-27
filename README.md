@@ -1,5 +1,6 @@
 # Binary Object loggable.Logger Implementation
 [![Build Status](https://travis-ci.com/georgeerol/BinaryObjectLogger.svg?branch=master)](https://travis-ci.com/georgeerol/BinaryObjectLogger)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=georgeerol_BinaryObjectLogger&metric=alert_status)](https://sonarcloud.io/dashboard?id=georgeerol_BinaryObjectLogger)
 
 ## Problem
 Using given interface and abstract class definitions, implement a Binary Object loggable.Logger. 
