@@ -38,6 +38,7 @@ public class BinaryFileReaderTest {
         String className = Loggable.class.getCanonicalName();
         BinaryFileReader binaryFileReader = new BinaryFileReader(className, file);
         Iterator data = binaryFileReader.read();
+        binaryFileReader.close();
         Loggable message = (Loggable) data.next();
         assertEquals(message.getLogMessage(), loggable.getLogMessage());
 

@@ -1,6 +1,5 @@
 package binarylogger;
 
-import binarylogger.BinaryFileReader;
 import loggable.BinaryLoggable;
 
 import java.io.File;
@@ -51,12 +50,12 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
 
     @Override
     public Iterator<T> read(Class<T> clazz) throws IOException {
-        Iterator<T> classInfo = null;
+        Iterator<T> classInfo;
         BinaryFileReader binaryFileReader = new BinaryFileReader(clazz.getCanonicalName(), file);
         try {
             classInfo = binaryFileReader.read();
         } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-
+            throw new IOException(e.getMessage());
         } catch (NoSuchMethodException e) {
             throw new IOException(clazz.getCanonicalName() + " does not have an empty constructor. " + e.getMessage());
         }
