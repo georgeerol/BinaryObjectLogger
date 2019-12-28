@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * This class read {@code BinaryLoggable}s from a provided file.
  * Created by George Fouche on 12/25/19.
  */
 public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable {
@@ -19,9 +20,8 @@ public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable
     private FileInputStream fileInputStream;
 
     /**
-     *
-     * @param tClassName-the class name
-     * @param file - the provided file
+     * @param tClassName-the {@code BinaryLoggable} class name
+     * @param file           - the provided file
      */
     public BinaryFileReader(String tClassName, File file) {
         this.tClassName = tClassName;
@@ -33,15 +33,17 @@ public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable
 
     /**
      * Read {@code BinaryLoggable}s  class data from the provided file
-     * @return
-     * @throws IOException
-     * @throws ClassNotFoundException - if provided class does not exist
-     * @throws NoSuchMethodException - if provided class does not have a no-arg constructor
-     * @throws IllegalAccessException - if provided class  does not have access
+     *
+     * @return - a list iterator of the provided class
+     * @throws IOException               - if any IO operation fails
+     * @throws ClassNotFoundException    - if provided class does not exist
+     * @throws NoSuchMethodException     - if provided class does not have a no-arg constructor
+     * @throws IllegalAccessException    - if provided class  does not have access
      * @throws InvocationTargetException -if provided class  can't ve invoke
-     * @throws InstantiationException - if provided class can't be instantiate
+     * @throws InstantiationException    - if provided class can't be instantiate
      */
-    public Iterator<T> read() throws IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public Iterator<T> read() throws IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException,
+            InvocationTargetException, InstantiationException {
         if (fileValidation.isValid() && classValidation.isValid() && classValidation.isInstanceOfBinaryLoggable()) {
             fileInputStream = new FileInputStream(file);
             T binaryLoggableClass;
@@ -68,14 +70,13 @@ public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable
     }
 
     /**
-     * Close the provided file input stream
+     * Close the provided file input stream.
+     *
      * @throws IOException - if it's unable to close the input stream
      */
     @Override
     public void close() throws IOException {
-        if (fileInputStream != null) {
-            fileInputStream.close();
-        }
+        if (fileInputStream != null) fileInputStream.close();
 
 
     }

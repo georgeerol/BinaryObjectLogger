@@ -29,7 +29,7 @@ public class Main {
                     System.out.println(e.getMessage()); }
             }
         } else {
-            /* Preferred Way: Run from this Main class by pressing Play from the IDE */
+            /* Run from this Main class by pressing Play from the IDE (Preferred Way*/
             try { demoRun(); } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

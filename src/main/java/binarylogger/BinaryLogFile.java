@@ -34,7 +34,7 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
     /**
      * @param loggable an instance of {@code loggable.BinaryLoggable} that needs to
      *                 be logged
-     * @throws IOException
+     * @throws IOException - if an IO operation fails
      */
     @Override
     public void write(T loggable) throws IOException {
@@ -57,7 +57,7 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
      * @param clazz a class of the type T, clazz should have a public
      *              no-arg constructor
      * @return
-     * @throws IOException - if the clazz  doesn't exist, doesn't have a no-arg constructor
+     * @throws IOException - if the clazz doesn't exist, doesn't have a no-arg constructor
      */
     @Override
     public Iterator<T> read(Class<T> clazz) throws IOException {
@@ -73,15 +73,12 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
     }
 
     /**
-     * Close the provided file output stream
-     * @throws Exception-if it's unable to close the output stream
+     * Close the provided file output stream.
+     *
+     * @throws Exception- if it's unable to close the output stream
      */
     @Override
     public void close() throws Exception {
-        if (fileOutputStream != null) {
-            this.fileOutputStream.close();
-        }
-
-
+        if (fileOutputStream != null) this.fileOutputStream.close();
     }
 }
