@@ -112,6 +112,8 @@ After running `mvn package` a target folder will be created and it will contain 
 
 From the command line or from the IDE move the `LogTestFile` to the **target** folder
 ![Log Test File](./misc/LogTestFileLocation.png)
+
+
 After moving the file, `cd` to the target folder and run the program via the command line:
 ```bash
 $ java -jar Binary-object-logger-1.0-SNAPSHOT.jar LogTestFile 
