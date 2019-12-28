@@ -5,7 +5,7 @@ import loggable.BinaryLoggable;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * This class check if a class name exit and is an implementation of {@code BinaryLoggable}
+ * This class checks if a class name exit and is an implementation of {@code BinaryLoggable}
  * Created by George Fouche on 12/25/19.
  */
 public class ClassValidation {

@@ -11,7 +11,7 @@ import java.util.Iterator;
 
 /**
  * This class is the implementation of {@code BinaryLogger}.
- * It write and read {@code BinaryLoggable}s to the provided file.
+ * It writes and reads {@code BinaryLoggable}s to the provided file.
  * Created by George Fouche on 12/23/19.
  */
 public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {

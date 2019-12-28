@@ -67,10 +67,11 @@ public interface loggable.BinaryLoggable {
 # Class Diagram
 * `BinaryLogger` - This class logs serialized instances of `{@code BinaryLoggable}` into file.
 * `BinaryLoggable` - This class represents an entity that can be logged by `{@code BinaryLogger}`.
-* `BinaryFileReader` - This class read `{@code BinaryLoggable}s` from a provided file.
-* `BinaryLogFile` -  This class is the implementation of {@code BinaryLogger}. 
-* `ClassValidation` - This class check if a class name exit and is an implementation of `{@code BinaryLoggable}`.
-* `FileValidation` - This class check the provided file exist or can be created.
+* `BinaryFileReader` - This class reads `{@code BinaryLoggable}s` from a provided file.
+* `BinaryLogFile` -  This class is the implementation of `{@code BinaryLogger}`. It writes and reads `{@code BinaryLoggable}s`
+ to the provided file. 
+* `ClassValidation` - This class checks if a class name exit and is an implementation of `{@code BinaryLoggable}`.
+* `FileValidation` - This class checks the provided file exist or can be created.
 *  `Loggable` - This class represents an entity that can be logged by `{@code BinaryLogger}`.
 *  `Systemlog` - This class extends Loggable and it represents an entity that can be logged by {@code BinaryLogger}.
 

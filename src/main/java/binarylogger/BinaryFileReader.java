@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * This class read {@code BinaryLoggable}s from a provided file.
+ * This class reads {@code BinaryLoggable}s from a provided file.
  * Created by George Fouche on 12/25/19.
  */
 public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable {
