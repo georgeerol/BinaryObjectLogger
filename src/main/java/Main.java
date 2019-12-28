@@ -4,8 +4,8 @@ import loggable.Loggable;
 import loggable.SystemLog;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Iterator;
-import java.util.Objects;
 
 /**
  * This class is a Demo Main class.
@@ -16,27 +16,32 @@ public class Main {
 
 
     /**
-     * Run the program via command line or via the IDE play button
+     * Preferred way is to run it via the IDE by providing a file.
+     * The other way is to run it via the command line.
+     * <p>
+     * See Readme file on how to run it via the IDE and command line
      *
      * @param args - the file provided from the command line
      */
     public static void main(String[] args) {
-        if (args.length == 1) {
-            /* Run from the command line. File needs to be provided */
+        try {
+            if (args.length == 0 || args.length > 1) {
+                throw new FileNotFoundException("Please provide a file as an argument");
+            }
+            /* Run from the command line or IDE. File needs to be provided */
             File providedFile = new File(args[0]);
-            if (providedFile.exists()) {
-                try { demoRunFromCommandLine(providedFile); } catch (Exception e) {
-                    System.out.println(e.getMessage()); }
+            if (!providedFile.exists()) {
+                throw new FileNotFoundException("File does not exist");
             }
-        } else {
-            /* Run from this Main class by pressing Play from the IDE (Preferred Way*/
-            try { demoRun(); } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+            demoRun(providedFile);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+
+
     }
 
-    private static void demoRunFromCommandLine(File file) throws Exception {
+    private static void demoRun(File file) throws Exception {
         BinaryLoggable loggable = new Loggable("I'm a log message");
         BinaryLoggable systemLog = new SystemLog("Computer", "I'm a super fast computer");
 
@@ -62,11 +67,5 @@ public class Main {
 
         }
 
-    }
-
-    public static void demoRun() throws Exception {
-        ClassLoader classLoader = Main.class.getClassLoader();
-        File file = new File(Objects.requireNonNull(classLoader.getResource("test")).getFile());
-        demoRunFromCommandLine(file);
     }
 }

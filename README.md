@@ -65,11 +65,31 @@ public interface loggable.BinaryLoggable {
 }
 ```
 
-# Run the Project
+# Run the project from Intellij IDE
+To Run the maven project from Intellij, run the Maven Project Lifecycle `clean` then `package`
+Maven Projects is located under `Views` -> `Tools Windows`
+
+#### Maven Projects Location
+![Maven Projects Location](./misc/mvnProjectsLocation.png)
+
+
+From the Lifecycle run `clean` then `pakckage`. After succeeding this step, run the main class`Main` 
+with an argument by editing the configuration and adding the argument file `LogTestFile`
+
+##### Lifecycle Clean and Package
+![Lifecycle](./misc/lifecycleCleanAndPackage.png)
+
+##### Configuration to run the APP from Intellij IDE
+![Edit configuration](./misc/editConfigurations.png)
+![Run App](./misc/runAppFromIDE.png)
+
+
+**Note**: Feel free to use your own file!
 
 
 ## To run the project from command line
 To build and compile the project via the command line do a  maven `clean` and then `package`
+If maven is not  install on your computer use the maven wrapper with `./mvnw` instead of `mvn`
 ### Maven Clean
 ```bash
 $ mvn clean
@@ -84,7 +104,20 @@ $ mvn package
 #### Maven Response:
 ![mvn package](./misc/mvnPackage.png)
 
+## The Jar File
+After running `mvn package` a target folder will be created and it will contain the jar file: `Binary-object-logger-1.0-SNAPSHOT.jar`.
 
+#### Target folder
+![target folder](./misc/targetFolder.png)
+
+From the command line or from the IDE move the `LogTestFile` to the **target** folder
+![Log Test File](./misc/LogTestFileLocation.png)
+After moving the file, `cd` to the target folder and run the program via the command line:
+```bash
+$ java -jar Binary-object-logger-1.0-SNAPSHOT.jar LogTestFile 
+```
+
+**Note**: Feel free to use your own file!
 
 # Class Diagram
 ![mvn package](./misc/ClassDiagram.png)
