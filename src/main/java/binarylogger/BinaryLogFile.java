@@ -10,9 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
 /**
- * A Binary log file stored data in binary format. That makes it quicker for writting log information.
- * <p>
- * Binary log file only capture Data Changing information, it is also used for replication.
+ * This class is the implementation of BinaryLogger.
+ * It write and read {@code BinaryLoggable}s to the provided file.
  * Created by George Fouche on 12/23/19.
  */
 public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
@@ -21,6 +20,9 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
     private FileValidation fileValidation;
     private File file;
 
+    /**
+     * @param file - the file to read and write on
+     */
     public BinaryLogFile(File file) {
         super(file);
         this.file = file;
@@ -29,6 +31,11 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
     }
 
 
+    /**
+     * @param loggable an instance of {@code loggable.BinaryLoggable} that needs to
+     *                 be logged
+     * @throws IOException
+     */
     @Override
     public void write(T loggable) throws IOException {
         if (fileValidation.isValid() && loggable != null) {
@@ -46,7 +53,12 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
 
     }
 
-
+    /**
+     * @param clazz a class of the type T, clazz should have a public
+     *              no-arg constructor
+     * @return
+     * @throws IOException - if the clazz  doesn't exist, doesn't have a no-arg constructor
+     */
     @Override
     public Iterator<T> read(Class<T> clazz) throws IOException {
         Iterator<T> classInfo;
@@ -60,6 +72,10 @@ public class BinaryLogFile<T extends BinaryLoggable> extends BinaryLogger<T> {
         return classInfo;
     }
 
+    /**
+     * Close the provided file output stream
+     * @throws Exception-if it's unable to close the output stream
+     */
     @Override
     public void close() throws Exception {
         if (fileOutputStream != null) {

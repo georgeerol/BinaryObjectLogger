@@ -5,6 +5,7 @@ import loggable.BinaryLoggable;
 import java.lang.reflect.InvocationTargetException;
 
 /**
+ *
  * Created by George Fouche on 12/25/19.
  */
 public class ClassValidation {
