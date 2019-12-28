@@ -9,7 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by George Fouche on 12/26/19.
@@ -88,7 +89,7 @@ public class BinaryLogFileIntegrationTest {
 
     @Test
     public void testWriteOnANoNameFile() {
-        String expectedMessage = "Unable to create file. No such file or directory";
+        String expectedMessage = "The file does not exist and can't be created. No such file or directory";
         BinaryLoggable loggable = new Loggable("I'm a log message");
         BinaryLogFile binaryLogFile = new BinaryLogFile(new File(""));
         try {
@@ -101,7 +102,7 @@ public class BinaryLogFileIntegrationTest {
 
     @Test
     public void testReadOnANoNameFile() {
-        String expectedMessage = "Unable to create file. No such file or directory";
+        String expectedMessage = "The file does not exist and can't be created. No such file or directory";
         BinaryLogFile binaryLogFile = new BinaryLogFile(new File(""));
         try {
             binaryLogFile.read(Loggable.class);

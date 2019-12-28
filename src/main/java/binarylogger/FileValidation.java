@@ -5,6 +5,7 @@ import java.io.IOException;
 
 
 /**
+ * This class check the provided file exist or can be created
  * Created by George Fouche on 12/25/19.
  */
 public class FileValidation {
@@ -19,7 +20,7 @@ public class FileValidation {
         try {
             if (!file.exists()) return file.createNewFile();
         } catch (IOException e) {
-            throw new IOException("Unable to create file. " + e.getMessage(), e);
+            throw new IOException("The file does not exist and can't be created. " + e.getMessage(), e);
         }
         return true;
     }

@@ -18,6 +18,11 @@ public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable
     private ClassValidation classValidation;
     private FileInputStream fileInputStream;
 
+    /**
+     *
+     * @param tClassName-the class name
+     * @param file - the provided file
+     */
     public BinaryFileReader(String tClassName, File file) {
         this.tClassName = tClassName;
         this.file = file;
@@ -26,6 +31,16 @@ public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable
 
     }
 
+    /**
+     * Read {@code BinaryLoggable}s  class data from the provided file
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException - if provided class does not exist
+     * @throws NoSuchMethodException - if provided class does not have a no-arg constructor
+     * @throws IllegalAccessException - if provided class  does not have access
+     * @throws InvocationTargetException -if provided class  can't ve invoke
+     * @throws InstantiationException - if provided class can't be instantiate
+     */
     public Iterator<T> read() throws IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         if (fileValidation.isValid() && classValidation.isValid() && classValidation.isInstanceOfBinaryLoggable()) {
             fileInputStream = new FileInputStream(file);
@@ -52,6 +67,10 @@ public class BinaryFileReader<T extends BinaryLoggable> implements AutoCloseable
         return null;
     }
 
+    /**
+     * Close the provided file input stream
+     * @throws IOException - if it's unable to close the input stream
+     */
     @Override
     public void close() throws IOException {
         if (fileInputStream != null) {
