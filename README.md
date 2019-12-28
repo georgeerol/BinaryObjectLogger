@@ -122,7 +122,22 @@ $ java -jar Binary-object-logger-1.0-SNAPSHOT.jar LogTestFile
 **Note**: Feel free to use your own file!
 
 # Class Diagram
-![mvn package](./misc/ClassDiagram.png)
+* `BinaryLogger` - This class logs serialized instances of `{@code BinaryLoggable}` into file.
+* `BinaryLoggable` - This class represents an entity that can be logged by `{@code BinaryLogger}`.
+* `BinaryFileReader` - This class read `{@code BinaryLoggable}s` from a provided file.
+* `BinaryLogFile` -  This class is the implementation of {@code BinaryLogger}. 
+* `ClassValidation` - This class check if a class name exit and is an implementation of `{@code BinaryLoggable}`.
+* `FileValidation` - This class check the provided file exist or can be created.
+*  `Loggable` - This class represents an entity that can be logged by `{@code BinaryLogger}`.
+*  `Systemlog` - This class extends Loggable and it represents an entity that can be logged by {@code BinaryLogger}.
+
+![Class Diagram](./misc/ClassDiagram.png)
+
+
+# Code Analysis with Sonarcloud
+![Class Diagram](./misc/codeAnalysis.png)
+
+
 
 
 

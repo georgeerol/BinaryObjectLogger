@@ -1,7 +1,7 @@
 package loggable;
 
 /**
- * This class extends Loggable  and it represents an entity that can be logged by {@code BinaryLogger}
+ * This class extends Loggable and it represents an entity that can be logged by {@code BinaryLogger}
  * Created by George Fouche on 12/26/19.
  */
 public class SystemLog extends Loggable {
