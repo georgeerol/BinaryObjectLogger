@@ -66,6 +66,8 @@ public interface loggable.BinaryLoggable {
 ```
 
 # Run the Project
+
+
 ## To run the project from command line
 To build and compile the project via the command line do a  maven `clean` and then `package`
 ### Maven Clean
@@ -81,3 +83,11 @@ $ mvn package
 ```
 #### Maven Response:
 ![mvn package](./misc/mvnPackage.png)
+
+
+
+# Class Diagram
+![mvn package](./misc/ClassDiagram.png)
+
+
+
